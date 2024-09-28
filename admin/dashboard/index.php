@@ -22,6 +22,8 @@ for ($bulan = 1; $bulan <= 12; $bulan++) {
     $jumlahJemaatPerBulan[] = $row['count'] ?? 0;
 }
 
+$colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#FFCD56', '#36A2EB', '#4BC0C0', '#FF6384', '#9966FF', '#FF9F40'];
+
 // Menghitung jumlah jemaat total
 $queryTotalJemaat = mysqli_query($con, "SELECT COUNT(*) as count FROM jemaat");
 $rowTotalJemaat = $queryTotalJemaat->fetch_assoc();
@@ -164,13 +166,14 @@ $dataValuesPernikahan = [
     // Chart Jumlah Jemaat Meninggal per Bulan
     const bulanLabels = <?php echo json_encode($months); ?>;
     const jemaatMeninggalData = <?php echo json_encode($jumlahJemaatPerBulan); ?>;
+    const backgroundColors = <?php echo json_encode($colors); ?>;
 
     const meninggalData = {
         labels: bulanLabels,
         datasets: [{
             label: 'Jumlah Jemaat Meninggal Berdasarkan Bulan',
             data: jemaatMeninggalData,
-            backgroundColor: 'rgb(54, 162, 235)',
+            backgroundColor: backgroundColors,
             borderColor: 'rgb(54, 162, 235)',
             fill: false,
             tension: 0.1
